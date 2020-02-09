@@ -254,7 +254,7 @@ namespace kolaysozluk
             // 
             // textBoxTimer
             // 
-            this.textBoxTimer.Interval = 1000;
+            this.textBoxTimer.Interval = 200;
             this.textBoxTimer.Tick += new System.EventHandler(this.textBoxTimer_Tick);
             // 
             // wordsTable
