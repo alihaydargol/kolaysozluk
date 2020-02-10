@@ -24,6 +24,7 @@ using kolaysozluk.Menu;
 using HtmlDocument = HtmlAgilityPack.HtmlDocument;
 using ThreadState = System.Threading.ThreadState;
 using Timer = System.Threading.Timer;
+using kolaysozluk.Web;
 
 namespace kolaysozluk
 {
@@ -45,8 +46,6 @@ namespace kolaysozluk
 
         private bool _mouseDown;
         private Point _lastLocation;
-
-        private bool _exceptionOccured = false;
         private WebDictionary _dictionary = WebDictionary.Tureng;
 
         public Form1()
@@ -81,8 +80,6 @@ namespace kolaysozluk
 
             //searchbox
             searchBox.KeyDown += SearchBox_KeyDown;
-
-
         }
 
 
@@ -203,8 +200,6 @@ namespace kolaysozluk
             // hotkey 
             if (m.Msg == 0x0312 && m.WParam.ToInt32() == MYACTION_HOTKEY_ID)
             {
-                _exceptionOccured = false;
-
                 Thread.Sleep(300);
                 SendKeys.SendWait("^(c)");
                 Thread.Sleep(300);
@@ -225,10 +220,10 @@ namespace kolaysozluk
             var uri = new Uri("https://tureng.com/tr/turkce-ingilizce/");
             var content = "";
             var inputText = searchBox.Text;
+            var meaning = "";
 
             try
             {
-                _exceptionOccured = false;
                 var html = "";
                 var css = "";
                 HtmlNode node;
@@ -240,12 +235,12 @@ namespace kolaysozluk
                         var turengBot = new Bot(uri, new WebClient());
                         node = turengBot.SelectNode("//*[@id='englishResultsTable']");
                         html = node.OuterHtml.Replace("href=", "");
-
+                        meaning = turengBot.SelectNode("//*[@id='englishResultsTable']/tr[4]/td[4]/a").InnerHtml;
                         css = "\n<style type=\"text/css\">\n" +
                               Properties.Resources.css +
                               "\n</style> ";
                         content = html + css;
-
+                        
                         break;
 
                     case WebDictionary.MerriamWebster:
@@ -293,11 +288,13 @@ namespace kolaysozluk
                         chromWebBrowser.LoadHtml(css + html, uri.AbsoluteUri);
                         fileOperator = new FileOperator(FilePaths.TemporaryFiles.LastPage);
                         fileOperator.SaveToFile(content);
+                        
                     });
                 }
-
+                
+                meaning = WebUtility.HtmlDecode(meaning);
                 fileOperator = new FileOperator(FilePaths.TemporaryFiles.LastWord);
-                fileOperator.SaveToFile(inputText);
+                fileOperator.SaveToFile(inputText + "/" + meaning);
             }
             catch (WebException exception)
             {
@@ -319,10 +316,8 @@ namespace kolaysozluk
                 else
                 {
                     chromWebBrowser.LoadHtml(content);
-
                 }
 
-                //_exceptionOccured = true;
             }
             catch (NullReferenceException exception)
             {
@@ -344,8 +339,6 @@ namespace kolaysozluk
                     chromWebBrowser.LoadHtml(content);
                 }
 
-                // _exceptionOccured = true;
-
             }
         }
 
@@ -354,7 +347,6 @@ namespace kolaysozluk
 
         private void SearchButton_Click(object sender, EventArgs e)
         {
-            _exceptionOccured = false;
             ActiveControl = searchBox;
             var inputText = searchBox.Text;
 
@@ -389,7 +381,7 @@ namespace kolaysozluk
 
             if (File.Exists(FilePaths.PermanentFiles.UserDictionary))
             {
-                words = File.ReadAllLines(FilePaths.PermanentFiles.UserDictionary);
+               // words = File.ReadAllLines(FilePaths.PermanentFiles.UserDictionary);
 
             }
 
@@ -402,7 +394,7 @@ namespace kolaysozluk
                 chromWebBrowser.LoadHtml(content);
                 return;
             }
-
+            /*
             DataTable dataTable = new DataTable();
             dataTable.Columns.Add("Kelime");
             dataTable.Columns.Add("Tarih");
@@ -416,7 +408,7 @@ namespace kolaysozluk
                 if (DateTime.TryParse(rows[1], out time))
                     dataTable.Rows.Add(rows[0], time);
             }
-
+            */
 
             wordsTable.BringToFront();
         }

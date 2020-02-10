@@ -47,14 +47,14 @@ namespace kolaysozluk.Menu
             if (commandId == CefMenuCommand.AddToDictionary)
             {
                 var word = File.ReadAllText(FilePaths.TemporaryFiles.LastWord);
-                var fileOperatorWrite = new FileOperator(FilePaths.PermanentFiles.UserDictionary);
+                var userDictionary = new FileOperator(FilePaths.PermanentFiles.UserDictionary);
 
-                var words = File.ReadAllLines(FilePaths.PermanentFiles.UserDictionary);
+                var words = userDictionary.LoadFile();
                 
-                if (words.All(x => x.Substring(0,x.IndexOf("/")) != word))
+                if (words.All(x => x.Substring(0,x.IndexOf('/')) != word.Substring(0,word.IndexOf('/'))))
                 {
                     word += "/"+DateTime.Now;
-                    fileOperatorWrite.AppendFile(word);
+                    userDictionary.AppendFile(word);
                 }
                 else
                 {

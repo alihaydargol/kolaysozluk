@@ -9,11 +9,11 @@ namespace kolaysozluk.FileOps
 {
     class FileOperator
     {
-        public string CombinedPath { get;}
+        public string CombinedPath { get; }
         private readonly string _filePath;
         private readonly string _name;
 
-        public FileOperator(string path,string name)
+        public FileOperator(string path, string name)
         {
             _filePath = path;
             _name = name;
@@ -24,7 +24,7 @@ namespace kolaysozluk.FileOps
         {
             var lastIndex = combinedPath.LastIndexOf("\\");
             _filePath = combinedPath.Substring(0, lastIndex);
-            _name = combinedPath.Substring(lastIndex+1);
+            _name = combinedPath.Substring(lastIndex + 1);
             CombinedPath = combinedPath;
         }
 
@@ -34,8 +34,8 @@ namespace kolaysozluk.FileOps
             {
                 Directory.CreateDirectory(_filePath);
             }
-            
-            File.WriteAllText(CombinedPath,content);
+
+            File.WriteAllText(CombinedPath, content);
         }
 
         public void AppendFile(string content)
@@ -53,15 +53,19 @@ namespace kolaysozluk.FileOps
 
         public List<string> LoadFile()
         {
-            return File.ReadAllLines(CombinedPath).ToList();
+            if (File.Exists(CombinedPath))
+                return File.ReadAllLines(CombinedPath).ToList();
+
+            using (var f = File.Create(CombinedPath))
+                return new List<string>();
         }
 
         public static void DeleteTemporaryFiles()
-        {
-            var myDocumentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            var path = Path.Combine(myDocumentsPath,"kolaysozluk", FilePaths.TemporaryFiles.LastPage);
-            File.Delete(path);
-        }
+            {
+                var myDocumentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                var path = Path.Combine(myDocumentsPath, "kolaysozluk", FilePaths.TemporaryFiles.LastPage);
+                File.Delete(path);
+            }
 
+        }
     }
-}

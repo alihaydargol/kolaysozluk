@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -8,9 +9,9 @@ using System.Windows.Forms;
 using HtmlAgilityPack;
 using HtmlDocument = HtmlAgilityPack.HtmlDocument;
 
-namespace kolaysozluk
+namespace kolaysozluk.Web
 {
-    class Bot
+    public class Bot
     {
         public Uri Uri { get; set; }
         public WebClient Client { get; set; }
@@ -24,11 +25,10 @@ namespace kolaysozluk
             Client = client;
             Client.Encoding = Encoding.UTF8;
 
-            string html = "";
 
             try
             {
-                html = Client.DownloadString(Uri);
+                var html = Client.DownloadString(Uri);
                 Document = new HtmlDocument();
                 Document.LoadHtml(html);
             }
@@ -61,6 +61,12 @@ namespace kolaysozluk
                     Console.WriteLine(e);
                 }
             }
+        }
+
+        public static HtmlNode LoadHtml(string html)
+        {
+            var doc = new HtmlDocument();
+            return doc.DocumentNode;
         }
 
     }

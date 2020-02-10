@@ -15,23 +15,25 @@ namespace kolaysozluk.CustomControls
 {
     public partial class WordsTable : UserControl
     {
-        private List<(TextBox, TextBox)> textBoxTuples;
+        private List<(TextBox, TextBox, TextBox)> textBoxTuples;
         private int last = 0;
         public WordsTable()
         {
             InitializeComponent();
-            textBoxTuples = new List<(TextBox, TextBox)>();
-            textBoxTuples.Add((word1,meaning1));
-            textBoxTuples.Add((word2,meaning2));
-            textBoxTuples.Add((word3,meaning3));
-            textBoxTuples.Add((word4,meaning4));
-            LoadDictionary();
+            textBoxTuples = new List<(TextBox, TextBox, TextBox)>();
+            textBoxTuples.Add((word1, meaning1, date1));
+            textBoxTuples.Add((word2, meaning2, date1));
+            textBoxTuples.Add((word3, meaning3, date3));
+            textBoxTuples.Add((word4, meaning4, date4));
         }
 
         private void LoadDictionary()
         {
             FileOperator fOperator = new FileOperator(FilePaths.PermanentFiles.UserDictionary);
             var words = fOperator.LoadFile();
+            if(words.Count == 0)
+                return;
+            
             var lastWord = words.Last();
             if (word1.Text == lastWord.Substring(0, lastWord.IndexOf('/')))
                 return;
@@ -40,7 +42,6 @@ namespace kolaysozluk.CustomControls
             {
                 textBoxTuple.Item1.Text = string.Empty;
             }
-            
 
             string temp;
             var i = 0;
@@ -51,7 +52,7 @@ namespace kolaysozluk.CustomControls
                 last = i;
                 if (i > 3)
                 {
-                    last = j+1;
+                    last = j + 1;
                     break;
                 }
 
