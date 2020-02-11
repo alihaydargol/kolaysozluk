@@ -36,21 +36,21 @@
             this.tableContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.silToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
-            this.word1 = new System.Windows.Forms.TextBox();
-            this.word2 = new System.Windows.Forms.TextBox();
-            this.word3 = new System.Windows.Forms.TextBox();
-            this.word4 = new System.Windows.Forms.TextBox();
-            this.meaning1 = new System.Windows.Forms.TextBox();
-            this.meaning2 = new System.Windows.Forms.TextBox();
-            this.meaning3 = new System.Windows.Forms.TextBox();
-            this.meaning4 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.date1 = new System.Windows.Forms.TextBox();
-            this.date2 = new System.Windows.Forms.TextBox();
-            this.date3 = new System.Windows.Forms.TextBox();
-            this.date4 = new System.Windows.Forms.TextBox();
+            this.date1 = new System.Windows.Forms.Label();
+            this.date2 = new System.Windows.Forms.Label();
+            this.date3 = new System.Windows.Forms.Label();
+            this.date4 = new System.Windows.Forms.Label();
+            this.meaning3 = new System.Windows.Forms.Label();
+            this.meaning4 = new System.Windows.Forms.Label();
+            this.word4 = new System.Windows.Forms.Label();
+            this.word3 = new System.Windows.Forms.Label();
+            this.word2 = new System.Windows.Forms.Label();
+            this.word1 = new System.Windows.Forms.Label();
+            this.meaning1 = new System.Windows.Forms.Label();
+            this.meaning2 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.topPanel.SuspendLayout();
             this.tableContextMenuStrip.SuspendLayout();
@@ -74,6 +74,8 @@
             // 
             // previousPage
             // 
+            this.previousPage.BackgroundImage = global::kolaysozluk.Properties.Resources.arrow_back_circle;
+            this.previousPage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.previousPage.Dock = System.Windows.Forms.DockStyle.Left;
             this.previousPage.FlatAppearance.BorderSize = 0;
             this.previousPage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -81,11 +83,13 @@
             this.previousPage.Name = "previousPage";
             this.previousPage.Size = new System.Drawing.Size(75, 50);
             this.previousPage.TabIndex = 2;
-            this.previousPage.Text = "Önceki Sayfa";
             this.previousPage.UseVisualStyleBackColor = true;
+            this.previousPage.Click += new System.EventHandler(this.previousPage_Click);
             // 
             // nextPage
             // 
+            this.nextPage.BackgroundImage = global::kolaysozluk.Properties.Resources.arrow_forward_circle;
+            this.nextPage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.nextPage.Dock = System.Windows.Forms.DockStyle.Right;
             this.nextPage.FlatAppearance.BorderSize = 0;
             this.nextPage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -93,7 +97,6 @@
             this.nextPage.Name = "nextPage";
             this.nextPage.Size = new System.Drawing.Size(75, 50);
             this.nextPage.TabIndex = 1;
-            this.nextPage.Text = "Sonraki Sayfa";
             this.nextPage.UseVisualStyleBackColor = true;
             this.nextPage.Click += new System.EventHandler(this.nextPage_Click);
             // 
@@ -135,14 +138,6 @@
             this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 36.11111F));
             this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 36.11111F));
             this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27.77778F));
-            this.tableLayoutPanel.Controls.Add(this.word1, 0, 1);
-            this.tableLayoutPanel.Controls.Add(this.word2, 0, 2);
-            this.tableLayoutPanel.Controls.Add(this.word3, 0, 3);
-            this.tableLayoutPanel.Controls.Add(this.word4, 0, 4);
-            this.tableLayoutPanel.Controls.Add(this.meaning1, 1, 1);
-            this.tableLayoutPanel.Controls.Add(this.meaning2, 1, 2);
-            this.tableLayoutPanel.Controls.Add(this.meaning3, 1, 3);
-            this.tableLayoutPanel.Controls.Add(this.meaning4, 1, 4);
             this.tableLayoutPanel.Controls.Add(this.label1, 2, 0);
             this.tableLayoutPanel.Controls.Add(this.label2, 1, 0);
             this.tableLayoutPanel.Controls.Add(this.label3, 0, 0);
@@ -150,6 +145,14 @@
             this.tableLayoutPanel.Controls.Add(this.date2, 2, 2);
             this.tableLayoutPanel.Controls.Add(this.date3, 2, 3);
             this.tableLayoutPanel.Controls.Add(this.date4, 2, 4);
+            this.tableLayoutPanel.Controls.Add(this.meaning3, 1, 3);
+            this.tableLayoutPanel.Controls.Add(this.meaning4, 1, 4);
+            this.tableLayoutPanel.Controls.Add(this.word4, 0, 4);
+            this.tableLayoutPanel.Controls.Add(this.word3, 0, 3);
+            this.tableLayoutPanel.Controls.Add(this.word2, 0, 2);
+            this.tableLayoutPanel.Controls.Add(this.word1, 0, 1);
+            this.tableLayoutPanel.Controls.Add(this.meaning1, 1, 1);
+            this.tableLayoutPanel.Controls.Add(this.meaning2, 1, 2);
             this.tableLayoutPanel.Location = new System.Drawing.Point(4, -2);
             this.tableLayoutPanel.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel.Name = "tableLayoutPanel";
@@ -162,114 +165,6 @@
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel.Size = new System.Drawing.Size(586, 504);
             this.tableLayoutPanel.TabIndex = 4;
-            // 
-            // word1
-            // 
-            this.word1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
-            this.word1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.word1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.word1.Font = new System.Drawing.Font("Roboto", 28.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.word1.Location = new System.Drawing.Point(4, 59);
-            this.word1.Margin = new System.Windows.Forms.Padding(4);
-            this.word1.Multiline = true;
-            this.word1.Name = "word1";
-            this.word1.Size = new System.Drawing.Size(203, 103);
-            this.word1.TabIndex = 1;
-            this.word1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // word2
-            // 
-            this.word2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
-            this.word2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.word2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.word2.Font = new System.Drawing.Font("Roboto", 28.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.word2.Location = new System.Drawing.Point(4, 170);
-            this.word2.Margin = new System.Windows.Forms.Padding(4);
-            this.word2.Multiline = true;
-            this.word2.Name = "word2";
-            this.word2.Size = new System.Drawing.Size(203, 103);
-            this.word2.TabIndex = 1;
-            this.word2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // word3
-            // 
-            this.word3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
-            this.word3.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.word3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.word3.Font = new System.Drawing.Font("Roboto", 28.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.word3.Location = new System.Drawing.Point(4, 281);
-            this.word3.Margin = new System.Windows.Forms.Padding(4);
-            this.word3.Multiline = true;
-            this.word3.Name = "word3";
-            this.word3.Size = new System.Drawing.Size(203, 103);
-            this.word3.TabIndex = 1;
-            this.word3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // word4
-            // 
-            this.word4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
-            this.word4.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.word4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.word4.Font = new System.Drawing.Font("Roboto", 28.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.word4.Location = new System.Drawing.Point(4, 392);
-            this.word4.Margin = new System.Windows.Forms.Padding(4);
-            this.word4.Multiline = true;
-            this.word4.Name = "word4";
-            this.word4.Size = new System.Drawing.Size(203, 108);
-            this.word4.TabIndex = 1;
-            this.word4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // meaning1
-            // 
-            this.meaning1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
-            this.meaning1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.meaning1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.meaning1.Location = new System.Drawing.Point(215, 59);
-            this.meaning1.Margin = new System.Windows.Forms.Padding(4);
-            this.meaning1.Multiline = true;
-            this.meaning1.Name = "meaning1";
-            this.meaning1.Size = new System.Drawing.Size(203, 103);
-            this.meaning1.TabIndex = 1;
-            this.meaning1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // meaning2
-            // 
-            this.meaning2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
-            this.meaning2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.meaning2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.meaning2.Location = new System.Drawing.Point(215, 170);
-            this.meaning2.Margin = new System.Windows.Forms.Padding(4);
-            this.meaning2.Multiline = true;
-            this.meaning2.Name = "meaning2";
-            this.meaning2.Size = new System.Drawing.Size(203, 103);
-            this.meaning2.TabIndex = 1;
-            this.meaning2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // meaning3
-            // 
-            this.meaning3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
-            this.meaning3.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.meaning3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.meaning3.Location = new System.Drawing.Point(215, 281);
-            this.meaning3.Margin = new System.Windows.Forms.Padding(4);
-            this.meaning3.Multiline = true;
-            this.meaning3.Name = "meaning3";
-            this.meaning3.Size = new System.Drawing.Size(203, 103);
-            this.meaning3.TabIndex = 1;
-            this.meaning3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // meaning4
-            // 
-            this.meaning4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
-            this.meaning4.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.meaning4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.meaning4.Location = new System.Drawing.Point(215, 392);
-            this.meaning4.Margin = new System.Windows.Forms.Padding(4);
-            this.meaning4.Multiline = true;
-            this.meaning4.Name = "meaning4";
-            this.meaning4.Size = new System.Drawing.Size(203, 108);
-            this.meaning4.TabIndex = 1;
-            this.meaning4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label1
             // 
@@ -315,51 +210,123 @@
             // 
             // date1
             // 
-            this.date1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
-            this.date1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.date1.AutoSize = true;
             this.date1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.date1.Location = new System.Drawing.Point(425, 58);
-            this.date1.Multiline = true;
+            this.date1.Location = new System.Drawing.Point(425, 55);
             this.date1.Name = "date1";
-            this.date1.Size = new System.Drawing.Size(158, 105);
+            this.date1.Size = new System.Drawing.Size(158, 111);
             this.date1.TabIndex = 5;
-            this.date1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.date1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // date2
             // 
-            this.date2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
-            this.date2.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.date2.AutoSize = true;
             this.date2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.date2.Location = new System.Drawing.Point(425, 169);
-            this.date2.Multiline = true;
+            this.date2.Location = new System.Drawing.Point(425, 166);
             this.date2.Name = "date2";
-            this.date2.Size = new System.Drawing.Size(158, 105);
+            this.date2.Size = new System.Drawing.Size(158, 111);
             this.date2.TabIndex = 5;
-            this.date2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.date2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // date3
             // 
-            this.date3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
-            this.date3.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.date3.AutoSize = true;
             this.date3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.date3.Location = new System.Drawing.Point(425, 280);
-            this.date3.Multiline = true;
+            this.date3.Location = new System.Drawing.Point(425, 277);
             this.date3.Name = "date3";
-            this.date3.Size = new System.Drawing.Size(158, 105);
+            this.date3.Size = new System.Drawing.Size(158, 111);
             this.date3.TabIndex = 5;
-            this.date3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.date3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // date4
             // 
-            this.date4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
-            this.date4.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.date4.AutoSize = true;
             this.date4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.date4.Location = new System.Drawing.Point(425, 391);
-            this.date4.Multiline = true;
+            this.date4.Location = new System.Drawing.Point(425, 388);
             this.date4.Name = "date4";
-            this.date4.Size = new System.Drawing.Size(158, 110);
+            this.date4.Size = new System.Drawing.Size(158, 116);
             this.date4.TabIndex = 5;
-            this.date4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.date4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // meaning3
+            // 
+            this.meaning3.AutoSize = true;
+            this.meaning3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.meaning3.Location = new System.Drawing.Point(214, 277);
+            this.meaning3.Name = "meaning3";
+            this.meaning3.Size = new System.Drawing.Size(205, 111);
+            this.meaning3.TabIndex = 5;
+            this.meaning3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // meaning4
+            // 
+            this.meaning4.AutoSize = true;
+            this.meaning4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.meaning4.Location = new System.Drawing.Point(214, 388);
+            this.meaning4.Name = "meaning4";
+            this.meaning4.Size = new System.Drawing.Size(205, 116);
+            this.meaning4.TabIndex = 5;
+            this.meaning4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // word4
+            // 
+            this.word4.AutoSize = true;
+            this.word4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.word4.Location = new System.Drawing.Point(3, 388);
+            this.word4.Name = "word4";
+            this.word4.Size = new System.Drawing.Size(205, 116);
+            this.word4.TabIndex = 5;
+            this.word4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // word3
+            // 
+            this.word3.AutoSize = true;
+            this.word3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.word3.Location = new System.Drawing.Point(3, 277);
+            this.word3.Name = "word3";
+            this.word3.Size = new System.Drawing.Size(205, 111);
+            this.word3.TabIndex = 5;
+            this.word3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // word2
+            // 
+            this.word2.AutoSize = true;
+            this.word2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.word2.Location = new System.Drawing.Point(3, 166);
+            this.word2.Name = "word2";
+            this.word2.Size = new System.Drawing.Size(205, 111);
+            this.word2.TabIndex = 5;
+            this.word2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // word1
+            // 
+            this.word1.AutoSize = true;
+            this.word1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.word1.Location = new System.Drawing.Point(3, 55);
+            this.word1.Name = "word1";
+            this.word1.Size = new System.Drawing.Size(205, 111);
+            this.word1.TabIndex = 5;
+            this.word1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // meaning1
+            // 
+            this.meaning1.AutoSize = true;
+            this.meaning1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.meaning1.Location = new System.Drawing.Point(214, 55);
+            this.meaning1.Name = "meaning1";
+            this.meaning1.Size = new System.Drawing.Size(205, 111);
+            this.meaning1.TabIndex = 5;
+            this.meaning1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // meaning2
+            // 
+            this.meaning2.AutoSize = true;
+            this.meaning2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.meaning2.Location = new System.Drawing.Point(214, 166);
+            this.meaning2.Name = "meaning2";
+            this.meaning2.Size = new System.Drawing.Size(205, 111);
+            this.meaning2.TabIndex = 5;
+            this.meaning2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panel1
             // 
@@ -398,23 +365,23 @@
         private System.Windows.Forms.ContextMenuStrip tableContextMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem silToolStripMenuItem;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel;
-        private System.Windows.Forms.TextBox word1;
-        private System.Windows.Forms.TextBox word2;
-        private System.Windows.Forms.TextBox word3;
-        private System.Windows.Forms.TextBox word4;
-        private System.Windows.Forms.TextBox meaning1;
-        private System.Windows.Forms.TextBox meaning2;
-        private System.Windows.Forms.TextBox meaning3;
-        private System.Windows.Forms.TextBox meaning4;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button nextPage;
-        private System.Windows.Forms.TextBox date1;
-        private System.Windows.Forms.TextBox date2;
-        private System.Windows.Forms.TextBox date3;
-        private System.Windows.Forms.TextBox date4;
         private System.Windows.Forms.Button previousPage;
+        private System.Windows.Forms.Label date1;
+        private System.Windows.Forms.Label date2;
+        private System.Windows.Forms.Label date3;
+        private System.Windows.Forms.Label date4;
+        private System.Windows.Forms.Label meaning3;
+        private System.Windows.Forms.Label meaning4;
+        private System.Windows.Forms.Label word4;
+        private System.Windows.Forms.Label word3;
+        private System.Windows.Forms.Label word2;
+        private System.Windows.Forms.Label word1;
+        private System.Windows.Forms.Label meaning1;
+        private System.Windows.Forms.Label meaning2;
     }
 }

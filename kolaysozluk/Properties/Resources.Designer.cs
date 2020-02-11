@@ -81,6 +81,26 @@ namespace kolaysozluk.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap arrow_back_circle {
+            get {
+                object obj = ResourceManager.GetObject("arrow-back-circle", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap arrow_forward_circle {
+            get {
+                object obj = ResourceManager.GetObject("arrow-forward-circle", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to img,
         ///legend {
         /// border:0
@@ -136,6 +156,16 @@ namespace kolaysozluk.Properties {
         internal static string cambridgecss {
             get {
                 return ResourceManager.GetString("cambridgecss", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap close_circle {
+            get {
+                object obj = ResourceManager.GetObject("close-circle", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -212,16 +242,6 @@ namespace kolaysozluk.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap exiticon {
-            get {
-                object obj = ResourceManager.GetObject("exiticon", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to @import url(&apos;https://fonts.googleapis.com/css?lang=tr&amp;family=Product+Sans|Roboto:400,700&apos;);
         ///.gb_Ra {
         /// font:13px/27px Roboto,
@@ -274,6 +294,16 @@ namespace kolaysozluk.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap logo_github {
+            get {
+                object obj = ResourceManager.GetObject("logo-github", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to .card-box-title {
         /// color:#375c71;
         /// font-family:&apos;Lato&apos;,Helvetica,Arial,sans-serif;
@@ -308,9 +338,9 @@ namespace kolaysozluk.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap minimize {
+        internal static System.Drawing.Bitmap new_logo1 {
             get {
-                object obj = ResourceManager.GetObject("minimize", resourceCulture);
+                object obj = ResourceManager.GetObject("new-logo1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -318,9 +348,9 @@ namespace kolaysozluk.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap new_logo1 {
+        internal static System.Drawing.Bitmap remove_circle {
             get {
-                object obj = ResourceManager.GetObject("new-logo1", resourceCulture);
+                object obj = ResourceManager.GetObject("remove-circle", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

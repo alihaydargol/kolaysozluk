@@ -25,6 +25,7 @@ using HtmlDocument = HtmlAgilityPack.HtmlDocument;
 using ThreadState = System.Threading.ThreadState;
 using Timer = System.Threading.Timer;
 using kolaysozluk.Web;
+using kolaysozluk.CustomControls;
 
 namespace kolaysozluk
 {
@@ -80,8 +81,15 @@ namespace kolaysozluk
 
             //searchbox
             searchBox.KeyDown += SearchBox_KeyDown;
+
+            this.SizeChanged += Form1_SizeChanged;
         }
 
+        private void Form1_SizeChanged(object sender, EventArgs e)
+        {
+            Task.Factory.StartNew(wordsTable.changeSize);
+            //wordsTable.changeSize();
+        }
 
         private void SearchBox_KeyDown(object sender, KeyEventArgs e)
         {
@@ -111,6 +119,7 @@ namespace kolaysozluk
         }
         private void MinimizeButton_Click(object sender, EventArgs e)
         {
+            ActiveControl = null;
             Hide();
             sytemTrayNI.Visible = true;
         }
@@ -378,7 +387,7 @@ namespace kolaysozluk
         {
             ActiveControl = null;
             string[] words = null;
-
+            wordsTable.LoadDictionary(true,true);
             if (File.Exists(FilePaths.PermanentFiles.UserDictionary))
             {
                // words = File.ReadAllLines(FilePaths.PermanentFiles.UserDictionary);
@@ -449,6 +458,7 @@ namespace kolaysozluk
 
         private void ExitButton_Click(object sender, EventArgs e)
         {
+            ActiveControl = null;
             FileOperator.DeleteTemporaryFiles();
             Close();
         }

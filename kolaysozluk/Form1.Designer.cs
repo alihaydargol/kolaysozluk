@@ -136,13 +136,13 @@ namespace kolaysozluk
             // minimizeButton
             // 
             this.minimizeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.minimizeButton.BackgroundImage = global::kolaysozluk.Properties.Resources.minimize;
+            this.minimizeButton.BackgroundImage = global::kolaysozluk.Properties.Resources.remove_circle;
             this.minimizeButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.minimizeButton.FlatAppearance.BorderSize = 0;
             this.minimizeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.minimizeButton.Location = new System.Drawing.Point(433, 4);
             this.minimizeButton.Name = "minimizeButton";
-            this.minimizeButton.Size = new System.Drawing.Size(20, 20);
+            this.minimizeButton.Size = new System.Drawing.Size(25, 25);
             this.minimizeButton.TabIndex = 1;
             this.minimizeButton.UseVisualStyleBackColor = true;
             this.minimizeButton.Click += new System.EventHandler(this.MinimizeButton_Click);
@@ -151,13 +151,13 @@ namespace kolaysozluk
             // exitButton
             // 
             this.exitButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.exitButton.BackgroundImage = global::kolaysozluk.Properties.Resources.exiticon;
+            this.exitButton.BackgroundImage = global::kolaysozluk.Properties.Resources.close_circle;
             this.exitButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.exitButton.FlatAppearance.BorderSize = 0;
             this.exitButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.exitButton.Location = new System.Drawing.Point(465, 4);
             this.exitButton.Name = "exitButton";
-            this.exitButton.Size = new System.Drawing.Size(20, 20);
+            this.exitButton.Size = new System.Drawing.Size(25, 25);
             this.exitButton.TabIndex = 0;
             this.exitButton.UseVisualStyleBackColor = true;
             this.exitButton.Click += new System.EventHandler(this.ExitButton_Click);

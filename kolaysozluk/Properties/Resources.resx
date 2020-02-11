@@ -124,7 +124,6 @@
   <data name="css" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\css.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
-
   <data name="startup_page" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\startup page.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1254</value>
   </data>
@@ -134,15 +133,17 @@
   <data name="1200px-Merriam-Webster_logo.svg" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\1200px-Merriam-Webster_logo.svg.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-
   <data name="search-circle-outline" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\search-circle-outline.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="exiticon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\exiticon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="1433279304_tureng-sozluk-ico" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\1433279304_tureng-sozluk-ico.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="cambridgecss" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\cambridgecss.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="list-circle-outline2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\list-circle-outline2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="googlecss" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\googlecss.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1254</value>
@@ -150,13 +151,19 @@
   <data name="new-logo1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\new-logo1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="cambridgecss" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\cambridgecss.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  <data name="logo-github" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\logo-github.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="minimize" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\minimize.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="arrow-back-circle" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\arrow-back-circle.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="list-circle-outline2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\list-circle-outline2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="arrow-forward-circle" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\arrow-forward-circle.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="close-circle" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\close-circle.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="remove-circle" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\remove-circle.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
