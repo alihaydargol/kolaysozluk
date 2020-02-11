@@ -1,6 +1,6 @@
 # Kolay Sözlük
 
-**Kolay Sözlük** [CefSharp](https://github.com/cefsharp/CefSharp/) ve [Html Agility Pack (HAP)](https://link) kullanılarak yazılmış bir sözlüktür.
+**Kolay Sözlük** [CefSharp](https://github.com/cefsharp/CefSharp/) ve [Html Agility Pack (HAP)](https://github.com/zzzprojects/html-agility-pack) kullanılarak yazılmış bir sözlüktür.
 
 ### Neye çare oluyor?
 * İngilizce yazılar okurken sürekli kelime araştırma ihtiyacına,
