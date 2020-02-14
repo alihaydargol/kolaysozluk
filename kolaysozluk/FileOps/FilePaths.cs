@@ -28,5 +28,10 @@ namespace kolaysozluk.FileOps
             public static readonly string UserDictionary = Path.Combine(_appPath, DictionaryFile);
             public static readonly string Logs = Path.Combine(_appPath, LogsFile);
         }
+
+        public static void CreateRequirement()
+        {
+            Directory.CreateDirectory(_appPath);
+        }
     }
 }

@@ -18,6 +18,7 @@ namespace kolaysozluk.CustomControls
         private List<(Label, Label, Label)> labelTuples;
         private List<Label> labels;
         private int _last = 0;
+
         public WordsTable()
         {
             InitializeComponent();
@@ -28,6 +29,14 @@ namespace kolaysozluk.CustomControls
             labelTuples.Add((word3, meaning3, date3));
             labelTuples.Add((word4, meaning4, date4));
 
+            FileOperator fOperator = new FileOperator(FilePaths.PermanentFiles.UserDictionary);
+            var wordsCount = fOperator.LoadFile().Count;
+
+            if (wordsCount <= 4)
+                nextPage.Visible = false;
+
+            previousPage.Visible = false;
+
             foreach (var textBoxTuple in labelTuples)
             {
                 labels.Add(textBoxTuple.Item1);
@@ -35,7 +44,50 @@ namespace kolaysozluk.CustomControls
                 labels.Add(textBoxTuple.Item3);
             }
         }
+        public static int LevenshteinDistance(string s, string t)
+        {
+            int n = s.Length;
+            int m = t.Length;
+            int[,] d = new int[n + 1, m + 1];
 
+            // Step 1
+            if (n == 0)
+            {
+                return m;
+            }
+
+            if (m == 0)
+            {
+                return n;
+            }
+
+            // Step 2
+            for (int i = 0; i <= n; d[i, 0] = i++)
+            {
+            }
+
+            for (int j = 0; j <= m; d[0, j] = j++)
+            {
+            }
+
+            // Step 3
+            for (int i = 1; i <= n; i++)
+            {
+                //Step 4
+                for (int j = 1; j <= m; j++)
+                {
+                    // Step 5
+                    int cost = (t[j - 1] == s[i - 1]) ? 0 : 1;
+
+                    // Step 6
+                    d[i, j] = Math.Min(
+                        Math.Min(d[i - 1, j] + 1, d[i, j - 1] + 1),
+                        d[i - 1, j - 1] + cost);
+                }
+            }
+            // Step 7
+            return d[n, m];
+        }
 
         public void LoadDictionary(bool isNext, bool reset = false)
         {
@@ -45,6 +97,13 @@ namespace kolaysozluk.CustomControls
             //no words in the dictionary
             if (words.Count == 0)
                 return;
+
+            if (words.Count <= 4)
+                nextPage.Visible = false;
+            else
+            {
+                nextPage.Visible = true;
+            }
 
 
             var lastWord = words.Last();
@@ -56,11 +115,11 @@ namespace kolaysozluk.CustomControls
                 return;
 
 
-            foreach (var textBoxTuple in labelTuples)
+            foreach (var labelTuple in labelTuples)
             {
-                textBoxTuple.Item1.Text = string.Empty;
-                textBoxTuple.Item2.Text = string.Empty;
-                textBoxTuple.Item3.Text = string.Empty;
+                labelTuple.Item1.Text = string.Empty;
+                labelTuple.Item2.Text = string.Empty;
+                labelTuple.Item3.Text = string.Empty;
             }
 
             /*
@@ -128,7 +187,44 @@ namespace kolaysozluk.CustomControls
 
             Task.Factory.StartNew(changeSize);
         }
+        public void LoadSearchedWord(List<string> lines)
+        {
+            nextPage.Visible = false;
+            previousPage.Visible = false;
+            foreach (var labelTuple in labelTuples)
+            {
+                labelTuple.Item1.Text = string.Empty;
+                labelTuple.Item2.Text = string.Empty;
+                labelTuple.Item3.Text = string.Empty;
+            }
 
+            var sortedLines = lines.OrderBy(s => s.Last()).ToArray();
+
+            try
+            {
+                for (int i = 0; i < labelTuples.Count; i++)
+                {
+                    var temp = "";
+                    var ln = sortedLines[i];
+
+                    temp = ln.Substring(0, lines[i].IndexOf('/'));
+                    labelTuples[i].Item1.Text = temp;
+                    ln = ln.Replace(temp + "/", string.Empty);
+                    temp = ln.Substring(0, ln.IndexOf('/'));
+                    labelTuples[i].Item2.Text = temp;
+                    ln = ln.Replace(temp + "/", string.Empty);
+                    temp = ln.Substring(0, ln.Length-1).Replace(" ", "  ");
+                    labelTuples[i].Item3.Text = temp;
+
+                }
+
+            }
+            catch (Exception e)
+            {
+
+            }
+
+        }
         public void changeSize()
         {
             foreach (var lab in labels)
@@ -167,6 +263,7 @@ namespace kolaysozluk.CustomControls
 
         private void nextPage_Click(object sender, EventArgs e)
         {
+            previousPage.Visible = true;
             ParentForm.ActiveControl = null;
             LoadDictionary(true);
         }
@@ -175,6 +272,34 @@ namespace kolaysozluk.CustomControls
         {
             ParentForm.ActiveControl = null;
             LoadDictionary(false);
+        }
+
+        private void label_Click(object sender, EventArgs e)
+        {
+
+            var lb = sender as Label;
+            var name = lb.Name;
+            name = name.Substring(name.Length - 1);
+            var form1 = ParentForm as Form1;
+            var searchBox = form1.Controls.Find("searchBox", true).FirstOrDefault();
+
+            switch (name)
+            {
+                case "1":
+                    searchBox.Text = word1.Text;
+                    break;
+                case "2":
+                    searchBox.Text = word2.Text;
+                    break;
+                case "3":
+                    searchBox.Text = word3.Text;
+                    break;
+                case "4":
+                    searchBox.Text = word4.Text;
+                    break;
+            }
+
+            form1.Controls.Find("chromWebBrowser", true).FirstOrDefault().BringToFront();
         }
     }
 }

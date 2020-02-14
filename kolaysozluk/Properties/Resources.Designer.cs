@@ -286,6 +286,16 @@ namespace kolaysozluk.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap kolaysozluk {
+            get {
+                object obj = ResourceManager.GetObject("kolaysozluk", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap list_circle_outline2 {
             get {
                 object obj = ResourceManager.GetObject("list-circle-outline2", resourceCulture);
@@ -369,14 +379,11 @@ namespace kolaysozluk.Properties {
         ///   Looks up a localized string similar to 
         ///&lt;!DOCTYPE html&gt;
         ///&lt;html lang=&quot;tr&quot;&gt;
-        ///        &lt;link href=&quot;//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css&quot; rel=&quot;stylesheet&quot; id=&quot;bootstrap-css&quot;&gt;
-        ///        &lt;script src=&quot;//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js&quot;&gt;&lt;/script&gt;
-        ///        &lt;!------ Include the above in your HEAD tag ----------&gt;
-        ///        
-        ///            &lt;style type =&quot;text/css&quot;&gt;
-        ///            body { background-color: rgb(52, 73, 94);}
-        ///            .error-template {padding: 40px 15px;text-align: center;}
-        ///            .error [rest of string was truncated]&quot;;.
+        ///
+        ///&lt;style&gt;
+        ///    @font-face {
+        ///        font-family: octicons-link;
+        ///        src: url(data:font/woff;charset=utf-8;base64,d09GRgABAAAAAAZwABAAAAAACFQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABEU0lHAAAGaAAAAAgAAAAIAAAAAUdTVUIAAAZcAAAACgAAAAoAAQAAT1MvMgAAAyQAAABJAAAAYFYEU3RjbWFwAAADcAAAAEUAAACAAJThvmN2dCAAAATkAAAABAAAAAQAAAAAZnBnbQAAA7gAAACyAAABCUM+8IhnYXNwAAAGTAAAABAAAAAQABoAI2dseWYAAAFsAAABPAAAAZwcEq9taGVhZAAAAsgAAAA0AAAANgh4a91oaGVhAAADCAAAABoAAAAkCA8DRGhtdHgAAAL8AAAADAAAAAwGAACfbG9j [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string startup_page {
             get {

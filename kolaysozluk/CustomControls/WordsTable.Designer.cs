@@ -217,6 +217,7 @@
             this.date1.Size = new System.Drawing.Size(158, 111);
             this.date1.TabIndex = 5;
             this.date1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.date1.Click += new System.EventHandler(this.label_Click);
             // 
             // date2
             // 
@@ -227,6 +228,7 @@
             this.date2.Size = new System.Drawing.Size(158, 111);
             this.date2.TabIndex = 5;
             this.date2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.date2.Click += new System.EventHandler(this.label_Click);
             // 
             // date3
             // 
@@ -237,6 +239,7 @@
             this.date3.Size = new System.Drawing.Size(158, 111);
             this.date3.TabIndex = 5;
             this.date3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.date3.Click += new System.EventHandler(this.label_Click);
             // 
             // date4
             // 
@@ -247,6 +250,7 @@
             this.date4.Size = new System.Drawing.Size(158, 116);
             this.date4.TabIndex = 5;
             this.date4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.date4.Click += new System.EventHandler(this.label_Click);
             // 
             // meaning3
             // 
@@ -257,6 +261,7 @@
             this.meaning3.Size = new System.Drawing.Size(205, 111);
             this.meaning3.TabIndex = 5;
             this.meaning3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.meaning3.Click += new System.EventHandler(this.label_Click);
             // 
             // meaning4
             // 
@@ -267,6 +272,7 @@
             this.meaning4.Size = new System.Drawing.Size(205, 116);
             this.meaning4.TabIndex = 5;
             this.meaning4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.meaning4.Click += new System.EventHandler(this.label_Click);
             // 
             // word4
             // 
@@ -277,6 +283,7 @@
             this.word4.Size = new System.Drawing.Size(205, 116);
             this.word4.TabIndex = 5;
             this.word4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.word4.Click += new System.EventHandler(this.label_Click);
             // 
             // word3
             // 
@@ -287,6 +294,7 @@
             this.word3.Size = new System.Drawing.Size(205, 111);
             this.word3.TabIndex = 5;
             this.word3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.word3.Click += new System.EventHandler(this.label_Click);
             // 
             // word2
             // 
@@ -297,6 +305,7 @@
             this.word2.Size = new System.Drawing.Size(205, 111);
             this.word2.TabIndex = 5;
             this.word2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.word2.Click += new System.EventHandler(this.label_Click);
             // 
             // word1
             // 
@@ -307,6 +316,7 @@
             this.word1.Size = new System.Drawing.Size(205, 111);
             this.word1.TabIndex = 5;
             this.word1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.word1.Click += new System.EventHandler(this.label_Click);
             // 
             // meaning1
             // 
@@ -317,6 +327,7 @@
             this.meaning1.Size = new System.Drawing.Size(205, 111);
             this.meaning1.TabIndex = 5;
             this.meaning1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.meaning1.Click += new System.EventHandler(this.label_Click);
             // 
             // meaning2
             // 
@@ -327,6 +338,7 @@
             this.meaning2.Size = new System.Drawing.Size(205, 111);
             this.meaning2.TabIndex = 5;
             this.meaning2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.meaning2.Click += new System.EventHandler(this.label_Click);
             // 
             // panel1
             // 

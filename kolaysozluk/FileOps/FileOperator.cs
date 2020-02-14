@@ -28,6 +28,12 @@ namespace kolaysozluk.FileOps
             CombinedPath = combinedPath;
         }
 
+
+        public static void CreateDirectory(string path)
+        {
+            Directory.CreateDirectory(path);
+        }
+
         public void SaveToFile(string content)
         {
             if (!Directory.Exists(_filePath))
@@ -61,11 +67,11 @@ namespace kolaysozluk.FileOps
         }
 
         public static void DeleteTemporaryFiles()
-            {
-                var myDocumentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-                var path = Path.Combine(myDocumentsPath, "kolaysozluk", FilePaths.TemporaryFiles.LastPage);
-                File.Delete(path);
-            }
-
+        {
+            var myDocumentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            var path = Path.Combine(myDocumentsPath, "kolaysozluk", FilePaths.TemporaryFiles.LastPage);
+            File.Delete(path);
         }
+
     }
+}
