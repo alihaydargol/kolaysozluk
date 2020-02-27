@@ -36,9 +36,9 @@
             this.tableContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.silToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.dateLabel = new System.Windows.Forms.Label();
+            this.meaningLabel = new System.Windows.Forms.Label();
+            this.wordLabel = new System.Windows.Forms.Label();
             this.date1 = new System.Windows.Forms.Label();
             this.date2 = new System.Windows.Forms.Label();
             this.date3 = new System.Windows.Forms.Label();
@@ -138,9 +138,9 @@
             this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 36.11111F));
             this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 36.11111F));
             this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27.77778F));
-            this.tableLayoutPanel.Controls.Add(this.label1, 2, 0);
-            this.tableLayoutPanel.Controls.Add(this.label2, 1, 0);
-            this.tableLayoutPanel.Controls.Add(this.label3, 0, 0);
+            this.tableLayoutPanel.Controls.Add(this.dateLabel, 2, 0);
+            this.tableLayoutPanel.Controls.Add(this.meaningLabel, 1, 0);
+            this.tableLayoutPanel.Controls.Add(this.wordLabel, 0, 0);
             this.tableLayoutPanel.Controls.Add(this.date1, 2, 1);
             this.tableLayoutPanel.Controls.Add(this.date2, 2, 2);
             this.tableLayoutPanel.Controls.Add(this.date3, 2, 3);
@@ -166,47 +166,50 @@
             this.tableLayoutPanel.Size = new System.Drawing.Size(586, 504);
             this.tableLayoutPanel.TabIndex = 4;
             // 
-            // label1
+            // dateLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
-            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Font = new System.Drawing.Font("Roboto", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label1.Location = new System.Drawing.Point(426, 0);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(156, 55);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Tarih";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.dateLabel.AutoSize = true;
+            this.dateLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
+            this.dateLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dateLabel.Font = new System.Drawing.Font("Roboto", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.dateLabel.Location = new System.Drawing.Point(426, 0);
+            this.dateLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.dateLabel.Name = "dateLabel";
+            this.dateLabel.Size = new System.Drawing.Size(156, 55);
+            this.dateLabel.TabIndex = 3;
+            this.dateLabel.Text = "Tarih";
+            this.dateLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.dateLabel.Click += new System.EventHandler(this.labelOrder_Click);
             // 
-            // label2
+            // meaningLabel
             // 
-            this.label2.AutoSize = true;
-            this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
-            this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label2.Font = new System.Drawing.Font("Roboto", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label2.Location = new System.Drawing.Point(215, 0);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(203, 55);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "Anlam";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.meaningLabel.AutoSize = true;
+            this.meaningLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
+            this.meaningLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.meaningLabel.Font = new System.Drawing.Font("Roboto", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.meaningLabel.Location = new System.Drawing.Point(215, 0);
+            this.meaningLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.meaningLabel.Name = "meaningLabel";
+            this.meaningLabel.Size = new System.Drawing.Size(203, 55);
+            this.meaningLabel.TabIndex = 4;
+            this.meaningLabel.Text = "Anlam";
+            this.meaningLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.meaningLabel.Click += new System.EventHandler(this.labelOrder_Click);
             // 
-            // label3
+            // wordLabel
             // 
-            this.label3.AutoSize = true;
-            this.label3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
-            this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label3.Font = new System.Drawing.Font("Roboto", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label3.Location = new System.Drawing.Point(4, 0);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(203, 55);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Kelime";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.wordLabel.AutoSize = true;
+            this.wordLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
+            this.wordLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.wordLabel.Font = new System.Drawing.Font("Roboto", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.wordLabel.Location = new System.Drawing.Point(4, 0);
+            this.wordLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.wordLabel.Name = "wordLabel";
+            this.wordLabel.Size = new System.Drawing.Size(203, 55);
+            this.wordLabel.TabIndex = 4;
+            this.wordLabel.Text = "Kelime";
+            this.wordLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.wordLabel.Click += new System.EventHandler(this.labelOrder_Click);
             // 
             // date1
             // 
@@ -377,9 +380,9 @@
         private System.Windows.Forms.ContextMenuStrip tableContextMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem silToolStripMenuItem;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label dateLabel;
+        private System.Windows.Forms.Label meaningLabel;
+        private System.Windows.Forms.Label wordLabel;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button nextPage;
         private System.Windows.Forms.Button previousPage;

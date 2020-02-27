@@ -1,4 +1,5 @@
-﻿using System;
+﻿using kolaysozluk.Dictionary;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -57,13 +58,46 @@ namespace kolaysozluk.FileOps
             }
         }
 
-        public List<string> LoadFile()
+       /* public List<string> LoadFile()
         {
             if (File.Exists(CombinedPath))
                 return File.ReadAllLines(CombinedPath).ToList();
 
             using (var f = File.Create(CombinedPath))
                 return new List<string>();
+        }*/
+
+
+        public List<Entry> LoadFile()
+        {
+            List<Entry> entries = new List<Entry>();
+            if (File.Exists(CombinedPath))
+            {
+                using(StreamReader sr = new StreamReader(CombinedPath))
+                {
+                    Entry entry;
+                    string line = "";
+                    string temp = "";
+
+                    while (!sr.EndOfStream)
+                    {
+                        entry = new Entry();
+                        line = sr.ReadLine();
+                        temp = line.Substring(0, line.IndexOf('/'));
+                        entry.Word = temp;
+                        line = line.Replace(temp + '/', string.Empty);
+                        temp = line.Substring(0, line.IndexOf('/'));
+                        entry.Meaning = temp;
+                        temp = line.Replace(temp + '/', string.Empty);
+                        entry.Date = temp;
+                        entries.Add(entry);
+                    }
+                }
+                return entries;
+            }
+
+            using (var f = File.Create(CombinedPath))
+                return new List<Entry>();
         }
 
         public static void DeleteTemporaryFiles()

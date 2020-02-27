@@ -9,6 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using CefSharp;
+using kolaysozluk.Dictionary;
 using kolaysozluk.FileOps;
 
 namespace kolaysozluk.Menu
@@ -64,7 +65,7 @@ namespace kolaysozluk.Menu
 
                 var words = userDictionary.LoadFile();
 
-                if (words.All(x => x.Substring(0, x.IndexOf('/')) != word.Substring(0, word.IndexOf('/'))))
+                if (words.All(x => x.Word != word.Substring(0,word.IndexOf('/'))))
                 {
                     word += "/" + DateTime.Now;
                     userDictionary.AppendFile(word);

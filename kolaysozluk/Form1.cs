@@ -417,10 +417,10 @@ namespace kolaysozluk
         private void SavedWords_Click(object sender, EventArgs e)
         {
             ActiveControl = null;
-            string[] words = null;
+          //  string[] words = null;
             isListing = true;
             dictionarySelectorPanel.Visible = false;
-            wordsTable.LoadDictionary(true,true);
+            wordsTable.LoadDictionary();
 
             if (!File.Exists(FilePaths.PermanentFiles.UserDictionary))
             {
