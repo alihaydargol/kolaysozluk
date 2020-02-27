@@ -107,21 +107,27 @@ namespace kolaysozluk.CustomControls
 
             FileOperator fOperator = new FileOperator(FilePaths.PermanentFiles.UserDictionary);
             entries = fOperator.LoadFile();
-            _lastListing = listing;
-
+            
             switch (listing)
             {
                 case Listing.ByWord:
                     entries = entries.OrderBy(x => x.Word).ToList();
+                    if (_lastListing != Listing.ByWord)
+                        reset = true;
                     break;
                 case Listing.ByMeaning:
                     entries = entries.OrderBy(x => x.Meaning).ToList();
+                    if (_lastListing != Listing.ByMeaning)
+                        reset = true;
                     break;
                 case Listing.ByDate:
+                    if (_lastListing != Listing.ByDate)
+                        reset = true;
                     entries = entries.OrderBy(x => DateTime.Parse(x.Date)).ToList();
                     break;
             }
 
+            _lastListing = listing;
             //no words in the dictionary
             if (entries.Count == 0)
                 return;
@@ -208,11 +214,20 @@ namespace kolaysozluk.CustomControls
                 labelTuple.Item3.Text = string.Empty;
             }
 
+            if (lines.Count == 0)
+                return;
+
             var sortedLines = lines.OrderBy(s => s.Last()).ToArray();
 
             try
             {
-                for (int i = 0; i < _labelTuples.Count; i++)
+                int lenght;
+                if (sortedLines.Length < 4)
+                    lenght = sortedLines.Length;
+                else
+                    lenght = _labelTuples.Count;
+
+                for (int i = 0; i < lenght; i++)
                 {
                     var temp = "";
                     var ln = sortedLines[i];
@@ -270,13 +285,13 @@ namespace kolaysozluk.CustomControls
         {
             previousPage.Visible = true;
             ParentForm.ActiveControl = null;
-            LoadDictionary();
+            LoadDictionary(listing: _lastListing);
         }
 
         private void previousPage_Click(object sender, EventArgs e)
         {
             ParentForm.ActiveControl = null;
-            LoadDictionary(page.Previous);
+            LoadDictionary(to: page.Previous, listing: _lastListing);
         }
 
         private void label_Click(object sender, EventArgs e)

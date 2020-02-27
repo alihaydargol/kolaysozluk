@@ -96,6 +96,7 @@ namespace kolaysozluk.FileOps
                 return entries;
             }
 
+            CreateDirectory(_filePath);
             using (var f = File.Create(CombinedPath))
                 return new List<Entry>();
         }
