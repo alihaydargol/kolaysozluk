@@ -376,9 +376,9 @@ namespace kolaysozluk
 
         private void SearchBox_TextChanged(object sender, EventArgs e)
         {
-            if(!isListing)
+            var str = searchBox.Text;
+            if (!isListing)
             {
-                var str = searchBox.Text;
                 str = str.Replace("\n", String.Empty);
                 str = str.Replace("\r", String.Empty);
                 str = str.Replace("\t", String.Empty);
@@ -390,7 +390,6 @@ namespace kolaysozluk
             }
             else
             {
-                var str = searchBox.Text;
                 str = str.Replace("\n", String.Empty);
                 str = str.Replace("\r", String.Empty);
                 str = str.Replace("\t", String.Empty);
@@ -407,7 +406,7 @@ namespace kolaysozluk
                     }
                 }
 
-
+                // TODO: burayı biraz daha geliştir. aranan kelimeyi bulsada listelememe ihtimali var
                 wordsTable.LoadSearchedWord(wordList);
             }
 

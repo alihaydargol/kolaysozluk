@@ -55,7 +55,7 @@ namespace kolaysozluk.Menu
                     MessageBox.Show("Eklenecek Dizin Bulunamadı \n" + "Hata Mesajı:" + e.Message);
                     return false;
                 }
-                catch(FileNotFoundException e)
+                catch(FileNotFoundException)
                 {
                     MessageBox.Show("Bu Sayfayı Ekleyemezsin");
                     return false;

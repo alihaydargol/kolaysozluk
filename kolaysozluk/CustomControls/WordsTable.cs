@@ -156,7 +156,6 @@ namespace kolaysozluk.CustomControls
                 labelTuple.Item3.Text = string.Empty;
             }       
 
-            string temp;
             int i = 0;
 
             switch (to)
@@ -272,7 +271,7 @@ namespace kolaysozluk.CustomControls
                         {
                             lab.Font = new Font(lab.Font.FontFamily, newSize, lab.Font.Style);
                         }
-                        catch (Exception e)
+                        catch (Exception)
                         {
                             lab.Text = "haha çöktüm";
                         }
