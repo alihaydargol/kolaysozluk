@@ -49,6 +49,7 @@ namespace kolaysozluk
             this.dictionarySelectorPanel = new System.Windows.Forms.Panel();
             this.contentPanel = new System.Windows.Forms.Panel();
             this.textBoxTimer = new System.Windows.Forms.Timer(this.components);
+            this.button1 = new System.Windows.Forms.Button();
             this.wordsTable = new kolaysozluk.CustomControls.WordsTable();
             this.searchPanel.SuspendLayout();
             this.topPanel.SuspendLayout();
@@ -102,6 +103,7 @@ namespace kolaysozluk
             // topPanel
             // 
             this.topPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(113)))), ((int)(((byte)(88)))), ((int)(((byte)(226)))));
+            this.topPanel.Controls.Add(this.button1);
             this.topPanel.Controls.Add(this.panel2);
             this.topPanel.Controls.Add(this.panel1);
             this.topPanel.Controls.Add(this.minimizeButton);
@@ -181,6 +183,7 @@ namespace kolaysozluk
             // 
             // chromWebBrowser
             // 
+            this.chromWebBrowser.ActivateBrowserOnCreation = false;
             this.chromWebBrowser.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chromWebBrowser.Location = new System.Drawing.Point(0, 0);
             this.chromWebBrowser.Name = "chromWebBrowser";
@@ -245,8 +248,8 @@ namespace kolaysozluk
             this.contentPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.contentPanel.Controls.Add(this.wordsTable);
             this.contentPanel.Controls.Add(this.chromWebBrowser);
+            this.contentPanel.Controls.Add(this.wordsTable);
             this.contentPanel.Location = new System.Drawing.Point(12, 152);
             this.contentPanel.Name = "contentPanel";
             this.contentPanel.Size = new System.Drawing.Size(476, 368);
@@ -256,6 +259,19 @@ namespace kolaysozluk
             // 
             this.textBoxTimer.Interval = 200;
             this.textBoxTimer.Tick += new System.EventHandler(this.textBoxTimer_Tick);
+            // 
+            // button1
+            // 
+            this.button1.BackgroundImage = global::kolaysozluk.Properties.Resources.logo_github;
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Location = new System.Drawing.Point(12, 0);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(30, 30);
+            this.button1.TabIndex = 7;
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // wordsTable
             // 
@@ -283,6 +299,7 @@ namespace kolaysozluk
             this.Controls.Add(this.searchPanel);
             this.Font = new System.Drawing.Font("Roboto", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Form1";
             this.searchPanel.ResumeLayout(false);
@@ -312,6 +329,7 @@ namespace kolaysozluk
         private CustomControls.WordsTable wordsTable;
         private System.Windows.Forms.Panel contentPanel;
         private System.Windows.Forms.Timer textBoxTimer;
+        private System.Windows.Forms.Button button1;
     }
 }
 

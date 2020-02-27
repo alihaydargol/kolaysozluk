@@ -48,6 +48,7 @@ namespace kolaysozluk
         private bool _mouseDown;
         private Point _lastLocation;
         private WebDictionary _dictionary = WebDictionary.Tureng;
+        private bool isListing;
 
         public Form1()
         {
@@ -55,6 +56,10 @@ namespace kolaysozluk
             InitializeComponent();
 
             Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("en-US");
+
+            //generate mydocument files
+
+            FilePaths.CreateRequirement();
 
             //keyboard hotkey
             //alt = 1 ,ctrl = 2, shift = 4, win = 8
@@ -78,7 +83,7 @@ namespace kolaysozluk
 
 
             chromWebBrowser.LoadHtml(Properties.Resources.startup_page);
-
+            
             //searchbox
             searchBox.KeyDown += SearchBox_KeyDown;
 
@@ -143,7 +148,6 @@ namespace kolaysozluk
         private void TopPanel_MouseUp(object sender, MouseEventArgs e)
         {
             _mouseDown = false;
-
         }
 
         protected override void WndProc(ref Message m)
@@ -215,6 +219,7 @@ namespace kolaysozluk
 
                 searchBox.Text = Clipboard.GetText();
 
+                this.Activate();
                 this.BringToFront();
                 this.Show();
             }
@@ -372,29 +377,51 @@ namespace kolaysozluk
         private void SearchBox_TextChanged(object sender, EventArgs e)
         {
             var str = searchBox.Text;
-            str = str.Replace("\n", String.Empty);
-            str = str.Replace("\r", String.Empty);
-            str = str.Replace("\t", String.Empty);
-            searchBox.Text = str;
-            BringToFront();
-            Show();
-            textBoxTimer.Stop();
-            textBoxTimer.Start();
+            if (!isListing)
+            {
+                str = str.Replace("\n", String.Empty);
+                str = str.Replace("\r", String.Empty);
+                str = str.Replace("\t", String.Empty);
+                searchBox.Text = str;
+                BringToFront();
+                Show();
+                textBoxTimer.Stop();
+                textBoxTimer.Start();
+            }
+            else
+            {
+                str = str.Replace("\n", String.Empty);
+                str = str.Replace("\r", String.Empty);
+                str = str.Replace("\t", String.Empty);
+
+                var lines = File.ReadAllLines(FilePaths.PermanentFiles.UserDictionary);
+                List<string> wordList = new List<string>();
+                foreach (var line in lines)
+                {
+                    //line.Substring(0,line.IndexOf('/')) == str
+                    var distance = WordsTable.LevenshteinDistance(line.Substring(0, line.IndexOf('/')), str);
+                    if (distance < 3)
+                    {
+                        wordList.Add(line + distance);
+                    }
+                }
+
+                // TODO: burayı biraz daha geliştir. aranan kelimeyi bulsada listelememe ihtimali var
+                wordsTable.LoadSearchedWord(wordList);
+            }
+
 
         }
 
         private void SavedWords_Click(object sender, EventArgs e)
         {
             ActiveControl = null;
-            string[] words = null;
-            wordsTable.LoadDictionary(true,true);
-            if (File.Exists(FilePaths.PermanentFiles.UserDictionary))
-            {
-               // words = File.ReadAllLines(FilePaths.PermanentFiles.UserDictionary);
+          //  string[] words = null;
+            isListing = true;
+            dictionarySelectorPanel.Visible = false;
+            wordsTable.LoadDictionary();
 
-            }
-
-            else
+            if (!File.Exists(FilePaths.PermanentFiles.UserDictionary))
             {
                 var content = Properties.Resources.errorpage;
                 content = content.Replace("info", "Henuz bir kelime eklemedin!");
@@ -403,21 +430,6 @@ namespace kolaysozluk
                 chromWebBrowser.LoadHtml(content);
                 return;
             }
-            /*
-            DataTable dataTable = new DataTable();
-            dataTable.Columns.Add("Kelime");
-            dataTable.Columns.Add("Tarih");
-            dataTable.Columns["Tarih"].DataType = typeof(DateTime);
-
-
-            foreach (var word in words)
-            {
-                var rows = word.Split('/');
-                DateTime time;
-                if (DateTime.TryParse(rows[1], out time))
-                    dataTable.Rows.Add(rows[0], time);
-            }
-            */
 
             wordsTable.BringToFront();
         }
@@ -426,6 +438,7 @@ namespace kolaysozluk
         {
             ActiveControl = null;
             _dictionary = WebDictionary.Tureng;
+            dictionarySelectorPanel.Visible = true;
             dictionarySelectorPanel.Location = turengButton.Location;
             chromWebBrowser.BringToFront();
             if (!string.IsNullOrWhiteSpace(searchBox.Text))
@@ -438,6 +451,7 @@ namespace kolaysozluk
         {
             ActiveControl = null;
             _dictionary = WebDictionary.MerriamWebster;
+            dictionarySelectorPanel.Visible = true;
             dictionarySelectorPanel.Location = merriamButton.Location;
             if (!string.IsNullOrWhiteSpace(searchBox.Text))
             {
@@ -449,6 +463,7 @@ namespace kolaysozluk
         {
             ActiveControl = null;
             _dictionary = WebDictionary.Cambridge;
+            dictionarySelectorPanel.Visible = true;
             dictionarySelectorPanel.Location = cambridgeButton.Location;
             if (!string.IsNullOrWhiteSpace(searchBox.Text))
             {
@@ -479,6 +494,11 @@ namespace kolaysozluk
         {
             textBoxTimer.Stop();
             Task.Factory.StartNew(FetchData);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/alihaydargol/kolaysozluk");
         }
     }
 }

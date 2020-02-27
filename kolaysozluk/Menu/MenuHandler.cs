@@ -9,6 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using CefSharp;
+using kolaysozluk.Dictionary;
 using kolaysozluk.FileOps;
 
 namespace kolaysozluk.Menu
@@ -16,7 +17,7 @@ namespace kolaysozluk.Menu
     class MenuHandler : IContextMenuHandler
     {
 
-        
+
         enum ContexMenuEnums
         {
             AddToDictionary = 26501
@@ -25,8 +26,6 @@ namespace kolaysozluk.Menu
         public void OnBeforeContextMenu(IWebBrowser chromiumWebBrowser, IBrowser browser, IFrame frame, IContextMenuParams parameters,
             IMenuModel model)
         {
-            Console.WriteLine("Context Menu Openned");
-
             if (model.Count > 0)
                 model.AddSeparator();
 
@@ -46,14 +45,29 @@ namespace kolaysozluk.Menu
         {
             if (commandId == CefMenuCommand.AddToDictionary)
             {
-                var word = File.ReadAllText(FilePaths.TemporaryFiles.LastWord);
+                string word;
+                try
+                {
+                    word = File.ReadAllText(FilePaths.TemporaryFiles.LastWord);
+                }
+                catch (DirectoryNotFoundException e)
+                {
+                    MessageBox.Show("Eklenecek Dizin Bulunamadı \n" + "Hata Mesajı:" + e.Message);
+                    return false;
+                }
+                catch(FileNotFoundException)
+                {
+                    MessageBox.Show("Bu Sayfayı Ekleyemezsin");
+                    return false;
+                }
+
                 var userDictionary = new FileOperator(FilePaths.PermanentFiles.UserDictionary);
 
                 var words = userDictionary.LoadFile();
-                
-                if (words.All(x => x.Substring(0,x.IndexOf('/')) != word.Substring(0,word.IndexOf('/'))))
+
+                if (words.All(x => x.Word != word.Substring(0,word.IndexOf('/'))))
                 {
-                    word += "/"+DateTime.Now;
+                    word += "/" + DateTime.Now;
                     userDictionary.AppendFile(word);
                 }
                 else
@@ -68,6 +82,7 @@ namespace kolaysozluk.Menu
 
         public void OnContextMenuDismissed(IWebBrowser chromiumWebBrowser, IBrowser browser, IFrame frame)
         {
+
         }
 
         public bool RunContextMenu(IWebBrowser chromiumWebBrowser, IBrowser browser, IFrame frame, IContextMenuParams parameters,
