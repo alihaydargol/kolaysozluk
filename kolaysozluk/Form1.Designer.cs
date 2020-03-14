@@ -36,6 +36,7 @@ namespace kolaysozluk
             this.searchButton = new System.Windows.Forms.Button();
             this.searchBox = new System.Windows.Forms.TextBox();
             this.topPanel = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.minimizeButton = new System.Windows.Forms.Button();
@@ -49,7 +50,6 @@ namespace kolaysozluk
             this.dictionarySelectorPanel = new System.Windows.Forms.Panel();
             this.contentPanel = new System.Windows.Forms.Panel();
             this.textBoxTimer = new System.Windows.Forms.Timer(this.components);
-            this.button1 = new System.Windows.Forms.Button();
             this.wordsTable = new kolaysozluk.CustomControls.WordsTable();
             this.searchPanel.SuspendLayout();
             this.topPanel.SuspendLayout();
@@ -117,6 +117,19 @@ namespace kolaysozluk
             this.topPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TopPanel_MouseDown);
             this.topPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.TopPanel_MouseMove);
             this.topPanel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.TopPanel_MouseUp);
+            // 
+            // button1
+            // 
+            this.button1.BackgroundImage = global::kolaysozluk.Properties.Resources.logo_github;
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Location = new System.Drawing.Point(12, 0);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(30, 30);
+            this.button1.TabIndex = 7;
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // panel2
             // 
@@ -260,19 +273,6 @@ namespace kolaysozluk
             this.textBoxTimer.Interval = 200;
             this.textBoxTimer.Tick += new System.EventHandler(this.textBoxTimer_Tick);
             // 
-            // button1
-            // 
-            this.button1.BackgroundImage = global::kolaysozluk.Properties.Resources.logo_github;
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(12, 0);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(30, 30);
-            this.button1.TabIndex = 7;
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // wordsTable
             // 
             this.wordsTable.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
@@ -285,8 +285,7 @@ namespace kolaysozluk
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
             this.ClientSize = new System.Drawing.Size(501, 532);
             this.Controls.Add(this.contentPanel);

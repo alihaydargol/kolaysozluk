@@ -10,7 +10,7 @@ namespace kolaysozluk.Logger
     static class LogOperator
     {
         private static readonly string _logPath = FilePaths.PermanentFiles.Logs;
-        private static FileOperator fileOperator = new FileOperator(_logPath);
+        private static JsonOperator fileOperator = new JsonOperator(_logPath);
         public static void Log(Exception exception, string content = "")
         {
             var a = content ?? "";

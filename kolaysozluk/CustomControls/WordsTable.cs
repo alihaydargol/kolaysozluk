@@ -17,15 +17,12 @@ namespace kolaysozluk.CustomControls
 {
     public partial class WordsTable : UserControl
     {
+        private UserDictionary userDictionary;
         private List<(Label, Label, Label)> _labelTuples;
         private List<Label> _labels;
-        private Listing _lastListing;
+        private Ordering _lastOrder = Ordering.ByDate;
         private int _last = 0;
-        public enum page
-        {
-            Next,
-            Previous
-        }
+        private int _pageNumber = 0;
 
         public WordsTable()
         {
@@ -36,11 +33,8 @@ namespace kolaysozluk.CustomControls
             _labelTuples.Add((word2, meaning2, date2));
             _labelTuples.Add((word3, meaning3, date3));
             _labelTuples.Add((word4, meaning4, date4));
-
-            FileOperator fOperator = new FileOperator(FilePaths.PermanentFiles.UserDictionary);
-            var wordsCount = fOperator.LoadFile().Count;
-
-            if (wordsCount <= 4)
+            userDictionary = new UserDictionary(new JsonOperator(FilePaths.PermanentFiles.UserDictionary));
+            if (userDictionary.Count <= 4)
                 nextPage.Visible = false;
 
             previousPage.Visible = false;
@@ -53,8 +47,6 @@ namespace kolaysozluk.CustomControls
             }
         }
 
-
-        #region Kelime Benzerliği
         public static int LevenshteinDistance(string s, string t)
         {
             int n = s.Length;
@@ -99,111 +91,40 @@ namespace kolaysozluk.CustomControls
             // Step 7
             return d[n, m];
         }
-        #endregion
 
-        public void LoadDictionary(page to = page.Next, bool reset = false , Listing listing = Listing.ByDate)
+
+        public void LoadDictionary()
         {
-            List<Entry> entries;
+            var entries = userDictionary.FetchPage(_pageNumber);
 
-            FileOperator fOperator = new FileOperator(FilePaths.PermanentFiles.UserDictionary);
-            entries = fOperator.LoadFile();
-            
-            switch (listing)
-            {
-                case Listing.ByWord:
-                    entries = entries.OrderBy(x => x.Word).ToList();
-                    if (_lastListing != Listing.ByWord)
-                        reset = true;
-                    break;
-                case Listing.ByMeaning:
-                    entries = entries.OrderBy(x => x.Meaning).ToList();
-                    if (_lastListing != Listing.ByMeaning)
-                        reset = true;
-                    break;
-                case Listing.ByDate:
-                    if (_lastListing != Listing.ByDate)
-                        reset = true;
-                    entries = entries.OrderBy(x => DateTime.Parse(x.Date)).ToList();
-                    break;
-            }
-
-            _lastListing = listing;
             //no words in the dictionary
             if (entries.Count == 0)
                 return;
 
-            if (entries.Count <= 4)
-                nextPage.Visible = false;
-            else
-            {
-                nextPage.Visible = true;
-            }
-
-
             var lastWord = entries.Last();
-
-            _last = reset ? 0 : _last;
-
-            //it's the end of the words in the dictionary, can't go to next page unless it's reseted to begin
-            if (word1.Text == lastWord.Word && to == page.Next && !reset)
-                return;
-
 
             foreach (var labelTuple in _labelTuples)
             {
                 labelTuple.Item1.Text = string.Empty;
                 labelTuple.Item2.Text = string.Empty;
                 labelTuple.Item3.Text = string.Empty;
-            }       
+            }
 
             int i = 0;
 
-            switch (to)
+
+            for (int j = _last; j < entries.Count; j++)
             {
-                case page.Next:
-
-                    for (int j = _last; j < entries.Count; j++)
-                    {
-
-                        // data format  -> word/meaning/time
-                        // good/güzel/11.11.2011 11:11:11
-                        _labelTuples[i].Item1.Text = entries[j].Word;
-                        _labelTuples[i].Item2.Text = entries[j].Meaning; 
-                        _labelTuples[i].Item3.Text = entries[j].Date;
-
-                        i++;
-
-                        if (i >= _labelTuples.Count)
-                        {
-                            _last = i;
-                            break;
-                        }
-                    }
-                    break;
-                case page.Previous:
-                    for (int j = _last - 4; j < 4; j++)
-                    {
-                        // data format  -> word/meaning/time
-                        // good/güzel/11.11.2011 11:11:11
-                        _labelTuples[i].Item1.Text = entries[j].Word;
-                        _labelTuples[i].Item2.Text = entries[j].Meaning;
-                        _labelTuples[i].Item3.Text = entries[j].Date;
-
-                        i++;
-
-                        if (i >= _labelTuples.Count)
-                        {
-                            _last = i;
-                            break;
-                        }
-                    }
-
-                    break;
+                _labelTuples[j].Item1.Text = entries[j].Word;
+                _labelTuples[j].Item2.Text = entries[j].Meaning;
+                _labelTuples[j].Item3.Text = entries[j].Date;
             }
+
             Task.Factory.StartNew(changeSize);
         }
-        public void LoadSearchedWord(List<string> lines)
+        public void LoadSearchedWord(SortedDictionary<int, Entry> pairs)
         {
+            //TODO : kayıtlı sözlükten arama yaptıktan sonra butunları geri açmam lazım
             nextPage.Visible = false;
             previousPage.Visible = false;
             foreach (var labelTuple in _labelTuples)
@@ -213,41 +134,25 @@ namespace kolaysozluk.CustomControls
                 labelTuple.Item3.Text = string.Empty;
             }
 
-            if (lines.Count == 0)
+            if (pairs.Count == 0)
                 return;
-
-            var sortedLines = lines.OrderBy(s => s.Last()).ToArray();
-
             try
             {
-                int lenght;
-                if (sortedLines.Length < 4)
-                    lenght = sortedLines.Length;
-                else
-                    lenght = _labelTuples.Count;
-
-                for (int i = 0; i < lenght; i++)
+                int i = 0;
+                foreach (var entry in pairs.Values)
                 {
-                    var temp = "";
-                    var ln = sortedLines[i];
+                    if (i >= 4)
+                        return;
 
-                    temp = ln.Substring(0, lines[i].IndexOf('/'));
-                    _labelTuples[i].Item1.Text = temp;
-                    ln = ln.Replace(temp + "/", string.Empty);
-                    temp = ln.Substring(0, ln.IndexOf('/'));
-                    _labelTuples[i].Item2.Text = temp;
-                    ln = ln.Replace(temp + "/", string.Empty);
-                    temp = ln.Substring(0, ln.Length - 1).Replace(" ", "  ");
-                    _labelTuples[i].Item3.Text = temp;
-
+                    _labelTuples[i].Item1.Text = entry.Word;
+                    _labelTuples[i].Item2.Text = entry.Meaning;
+                    _labelTuples[i++].Item3.Text = entry.Date;
                 }
-
             }
             catch (Exception e)
             {
                 MessageBox.Show("Hata", e.Message);
             }
-
         }
         public void changeSize()
         {
@@ -284,18 +189,38 @@ namespace kolaysozluk.CustomControls
         {
             previousPage.Visible = true;
             ParentForm.ActiveControl = null;
-            LoadDictionary(listing: _lastListing);
+
+            if (_pageNumber < userDictionary.MaxPage - 1)
+            {
+                previousPage.Visible = true;
+                _pageNumber++;
+            }
+
+            if (_pageNumber == userDictionary.MaxPage - 1)
+                nextPage.Visible = false;
+
+
+            LoadDictionary();
         }
 
         private void previousPage_Click(object sender, EventArgs e)
         {
             ParentForm.ActiveControl = null;
-            LoadDictionary(to: page.Previous, listing: _lastListing);
+
+            if (_pageNumber > 0)
+            {
+                nextPage.Visible = true;
+                _pageNumber--;
+            }
+
+            if (_pageNumber == 0)
+                previousPage.Visible = false;
+
+            LoadDictionary();
         }
 
         private void label_Click(object sender, EventArgs e)
         {
-
             var lb = sender as Label;
             var name = lb.Name;
             name = name.Substring(name.Length - 1);
@@ -317,23 +242,51 @@ namespace kolaysozluk.CustomControls
                     searchBox.Text = word4.Text;
                     break;
             }
-
             form1.Controls.Find("chromWebBrowser", true).FirstOrDefault().BringToFront();
         }
 
         private void labelOrder_Click(object sender, EventArgs e)
         {
             var lb = sender as Label;
+            Ordering order;
             switch (lb.Name)
             {
                 case "wordLabel":
-                    LoadDictionary(listing: Listing.ByWord);
+                    order = Ordering.ByWord;
+                    userDictionary.Order(order);
+                    if (_lastOrder != order)
+                    {
+                        _pageNumber = 0;
+                        nextPage.Visible = true;
+                        previousPage.Visible = false;
+                        _lastOrder = order;
+                    }
+                    LoadDictionary();
                     break;
                 case "meaningLabel":
-                    LoadDictionary(listing: Listing.ByMeaning);
+                    order = Ordering.ByMeaning;
+                    userDictionary.Order(order);
+                    if (_lastOrder != order)
+                    {
+                        _pageNumber = 0;
+                        nextPage.Visible = true;
+                        previousPage.Visible = false;
+                        _lastOrder = order;
+                    }
+                    LoadDictionary();
                     break;
                 case "dateLabel":
-                    LoadDictionary(listing: Listing.ByDate);
+                    order = Ordering.ByDate;
+                    userDictionary.Order(order);
+                    if (_lastOrder != order)
+                    {
+                        _pageNumber = 0;
+                        nextPage.Visible = true;
+                        previousPage.Visible = false;
+                        _lastOrder = order;
+                    }
+                    userDictionary.Order(Ordering.ByDate);
+                    LoadDictionary();
                     break;
             }
         }
