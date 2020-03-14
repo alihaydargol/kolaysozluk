@@ -26,6 +26,7 @@ using ThreadState = System.Threading.ThreadState;
 using Timer = System.Threading.Timer;
 using kolaysozluk.Web;
 using kolaysozluk.CustomControls;
+using kolaysozluk.Dictionary;
 
 namespace kolaysozluk
 {
@@ -59,7 +60,7 @@ namespace kolaysozluk
 
             //generate mydocument files
 
-            FilePaths.CreateRequirement();
+            FilePaths.CreateSaveDirectory();
 
             //keyboard hotkey
             //alt = 1 ,ctrl = 2, shift = 4, win = 8
@@ -209,7 +210,6 @@ namespace kolaysozluk
             }
 
 
-
             // hotkey 
             if (m.Msg == 0x0312 && m.WParam.ToInt32() == MYACTION_HOTKEY_ID)
             {
@@ -222,6 +222,8 @@ namespace kolaysozluk
                 this.Activate();
                 this.BringToFront();
                 this.Show();
+
+                handled = true;
             }
 
             if (!handled)
@@ -294,20 +296,20 @@ namespace kolaysozluk
                         break;
                 }
 
-                FileOperator fileOperator;
+                JsonOperator fileOperator;
                 if (chromWebBrowser.InvokeRequired)
                 {
                     chromWebBrowser.Invoke((MethodInvoker)delegate
                     {
                         chromWebBrowser.LoadHtml(css + html, uri.AbsoluteUri);
-                        fileOperator = new FileOperator(FilePaths.TemporaryFiles.LastPage);
+                        fileOperator = new JsonOperator(FilePaths.TemporaryFiles.LastPage);
                         fileOperator.SaveToFile(content);
                         
                     });
                 }
                 
                 meaning = WebUtility.HtmlDecode(meaning);
-                fileOperator = new FileOperator(FilePaths.TemporaryFiles.LastWord);
+                fileOperator = new JsonOperator(FilePaths.TemporaryFiles.LastWord);
                 fileOperator.SaveToFile(inputText + "/" + meaning);
             }
             catch (WebException exception)
@@ -394,20 +396,21 @@ namespace kolaysozluk
                 str = str.Replace("\r", String.Empty);
                 str = str.Replace("\t", String.Empty);
 
-                var lines = File.ReadAllLines(FilePaths.PermanentFiles.UserDictionary);
-                List<string> wordList = new List<string>();
-                foreach (var line in lines)
+                var jsonOperator = new JsonOperator(FilePaths.PermanentFiles.UserDictionary);
+                List<Entry> entries = jsonOperator.LoadFile();
+                var closeWords = new SortedDictionary<int,Entry>();
+                foreach (var entry in entries)
                 {
-                    //line.Substring(0,line.IndexOf('/')) == str
-                    var distance = WordsTable.LevenshteinDistance(line.Substring(0, line.IndexOf('/')), str);
-                    if (distance < 3)
+                    var word = entry.Word;
+                    var distance = WordsTable.LevenshteinDistance(word, str);
+                    if (distance < 3 && word.Contains(str))
                     {
-                        wordList.Add(line + distance);
+                        closeWords.Add(distance,entry);
                     }
                 }
 
                 // TODO: burayı biraz daha geliştir. aranan kelimeyi bulsada listelememe ihtimali var
-                wordsTable.LoadSearchedWord(wordList);
+                wordsTable.LoadSearchedWord(closeWords);
             }
 
 
@@ -474,7 +477,7 @@ namespace kolaysozluk
         private void ExitButton_Click(object sender, EventArgs e)
         {
             ActiveControl = null;
-            FileOperator.DeleteTemporaryFiles();
+            JsonOperator.DeleteTemporaryFiles();
             Close();
         }
 

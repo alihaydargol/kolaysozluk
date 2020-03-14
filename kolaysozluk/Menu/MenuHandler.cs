@@ -45,10 +45,15 @@ namespace kolaysozluk.Menu
         {
             if (commandId == CefMenuCommand.AddToDictionary)
             {
-                string word;
+                Entry entry = new Entry();
+
                 try
                 {
-                    word = File.ReadAllText(FilePaths.TemporaryFiles.LastWord);
+                    var temp = File.ReadAllText(FilePaths.TemporaryFiles.LastWord);
+                    var index = temp.IndexOf('/');
+                    entry.Word = temp.Substring(0, index);
+                    // "good/güzel" lenght == 9 ,  temp.IndexOf('/') == 5
+                    entry.Meaning = temp.Substring(index + 1 , temp.Length - 1 - index);
                 }
                 catch (DirectoryNotFoundException e)
                 {
@@ -61,14 +66,13 @@ namespace kolaysozluk.Menu
                     return false;
                 }
 
-                var userDictionary = new FileOperator(FilePaths.PermanentFiles.UserDictionary);
+                var userDictionary = new JsonOperator(FilePaths.PermanentFiles.UserDictionary);
 
                 var words = userDictionary.LoadFile();
-
-                if (words.All(x => x.Word != word.Substring(0,word.IndexOf('/'))))
+                if (words.All(x => x.Word != entry.Word))
                 {
-                    word += "/" + DateTime.Now;
-                    userDictionary.AppendFile(word);
+                    entry.Date = DateTime.Now.ToString();
+                    userDictionary.AppendFile(entry.ToString());
                 }
                 else
                 {
